@@ -1,0 +1,29 @@
+name: plottertopicos
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  scoped_model: ^1.0.1
+  cupertino_icons: ^0.1.2
+  positioned_tap_detector: ^1.0.3
+  jaguar_serializer: 
+  path_provider: 
+  file_picker: ^1.4.2
+  flutter_bluetooth_serial: 0.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+
+
+  uses-material-design: true
