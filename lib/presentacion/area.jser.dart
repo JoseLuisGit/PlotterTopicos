@@ -36,6 +36,7 @@ abstract class _$PoligonoJsonSerializer implements Serializer<Poligono> {
   Map<String, dynamic> toMap(Poligono model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'getColor', model.getColor);
     setMapValue(ret, 'getTipo', model.getTipo);
     setMapValue(
         ret,
@@ -43,6 +44,7 @@ abstract class _$PoligonoJsonSerializer implements Serializer<Poligono> {
         codeIterable(
             model.puntos, (val) => _puntoJsonSerializer.toMap(val as Punto)));
     setMapValue(ret, 'tipo', model.tipo);
+    setMapValue(ret, 'color', model.color);
     return ret;
   }
 
@@ -53,6 +55,7 @@ abstract class _$PoligonoJsonSerializer implements Serializer<Poligono> {
     obj.puntos = codeIterable<Punto>(map['puntos'] as Iterable,
         (val) => _puntoJsonSerializer.fromMap(val as Map));
     obj.tipo = map['tipo'] as bool;
+    obj.color = map['color'] as int;
     return obj;
   }
 }
@@ -65,12 +68,15 @@ abstract class _$ObjetoJsonSerializer implements Serializer<Objeto> {
   Map<String, dynamic> toMap(Objeto model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'getNombre', model.getNombre);
+    setMapValue(ret, 'getTipo', model.getTipo);
     setMapValue(
         ret,
         'poligonos',
         codeIterable(model.poligonos,
             (val) => _poligonoJsonSerializer.toMap(val as Poligono)));
-    setMapValue(ret, 'color', passProcessor.serialize(model.color));
+    setMapValue(ret, 'nombre', model.nombre);
+    setMapValue(ret, 'tipo', model.tipo);
     return ret;
   }
 
@@ -80,7 +86,8 @@ abstract class _$ObjetoJsonSerializer implements Serializer<Objeto> {
     final obj = Objeto();
     obj.poligonos = codeIterable<Poligono>(map['poligonos'] as Iterable,
         (val) => _poligonoJsonSerializer.fromMap(val as Map));
-    obj.color = passProcessor.deserialize(map['color']);
+    obj.nombre = map['nombre'] as String;
+    obj.tipo = map['tipo'] as bool;
     return obj;
   }
 }
@@ -132,6 +139,11 @@ abstract class _$ControladorJsonSerializer implements Serializer<Controlador> {
     setMapValue(ret, 'asignarPrimerPunto', model.asignarPrimerPunto);
     setMapValue(ret, 'width', model.width);
     setMapValue(ret, 'height', model.height);
+    setMapValue(
+        ret,
+        'marcado',
+        codeIterable(model.marcado,
+            (val) => _poligonoJsonSerializer.toMap(val as Poligono)));
     return ret;
   }
 
@@ -145,6 +157,8 @@ abstract class _$ControladorJsonSerializer implements Serializer<Controlador> {
     obj.asignarPrimerPunto = map['asignarPrimerPunto'] as bool;
     obj.width = map['width'] as double;
     obj.height = map['height'] as double;
+    obj.marcado = codeIterable<Poligono>(map['marcado'] as Iterable,
+        (val) => _poligonoJsonSerializer.fromMap(val as Map));
     return obj;
   }
 }

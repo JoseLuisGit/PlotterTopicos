@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-
 import 'presentacion/area.dart';
 
 void main() => runApp(MyApp());
@@ -19,7 +16,7 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
-      home: areaPage()
+      home: AreaPage(),
     );
   }
 
